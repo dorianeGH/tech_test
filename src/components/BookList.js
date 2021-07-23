@@ -1,10 +1,12 @@
 import Grid from "@material-ui/core/Grid";
 import BookCard from "./BookCard";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { BookContext } from "../contexts/bookContext";
 
 export default function BookList() {
-  const [bookList, setBookList] = useState([]);
+  const { bookList, setBookList } = useContext(BookContext);
+
   useEffect(() => {
     axios({
       url: "https://api-dev.lelivrescolaire.fr/graphql",
