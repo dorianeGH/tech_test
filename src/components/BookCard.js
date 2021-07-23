@@ -36,11 +36,10 @@ export default function BookCard({ id, displayTitle, url, valid }) {
     <Grid item>
       <Card className={clsx(card)}>
         <CardActionArea>
-          <CardMedia className={media} image={url} title={displayTitle} />
+          <Link key={id} to={`/books/${id}`}>
+            <CardMedia className={media} image={url} />
+          </Link>
           <CardContent>
-            <Typography gutterBottom variant='h5' component='h2'>
-              {displayTitle}
-            </Typography>
             <Typography variant='body2' color='textSecondary' component='p'>
               {displayTitle}
             </Typography>

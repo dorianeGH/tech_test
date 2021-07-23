@@ -74,6 +74,7 @@ export default function BookList() {
             key={book.id}
             displayTitle={book.displayTitle}
             url={book.url}
+            id={book.id}
           />
         ))}
       </Grid>
