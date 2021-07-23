@@ -36,7 +36,7 @@ export default function BookCard({ id, displayTitle, url, valid }) {
     <Grid item>
       <Card
         className={clsx(card)}
-        style={!valid ? { background: "grey" } : null}
+        style={!valid ? { background: "grey", pointerEvents: "none" } : null}
       >
         <CardActionArea>
           <Link key={id} to={`/books/${id}`}>
