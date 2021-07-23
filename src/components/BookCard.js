@@ -34,7 +34,10 @@ export default function BookCard({ id, displayTitle, url, valid }) {
 
   return (
     <Grid item>
-      <Card className={clsx(card)}>
+      <Card
+        className={clsx(card)}
+        style={!valid ? { background: "grey" } : null}
+      >
         <CardActionArea>
           <Link key={id} to={`/books/${id}`}>
             <CardMedia className={media} image={url} />

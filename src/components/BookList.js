@@ -75,6 +75,9 @@ export default function BookList() {
             displayTitle={book.displayTitle}
             url={book.url}
             id={book.id}
+            // style={book.valid === false ? { backgroundColor: "grey" } : null}
+            // style={book.valid}
+            valid={book.valid}
           />
         ))}
       </Grid>
