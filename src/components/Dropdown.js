@@ -38,7 +38,7 @@ function Dropdown() {
           }}
         >
           Level
-          <option key='None' value={0}>
+          <option key='All' value='All'>
             All
           </option>
           {levels.map((level) => (
