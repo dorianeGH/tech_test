@@ -2,6 +2,8 @@ import { BookContext } from "../contexts/bookContext";
 import { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import Grid from "@material-ui/core/Grid";
+import BookCard from "../components/BookCard";
 
 export default function BookDetailsPage() {
   const { bookList } = useContext(BookContext);
@@ -15,7 +17,7 @@ export default function BookDetailsPage() {
       url: "https://api-dev.lelivrescolaire.fr/graphql",
       method: "post",
       data: {
-        query: `{
+        query: `query($bookId:Int){
           viewer {
             chapters(bookIds:[$bookId]) {
                   hits {
@@ -32,9 +34,10 @@ export default function BookDetailsPage() {
         },
       },
     }).then((result) => {
-      console.log(result.data);
+      setChapterList(result.data.data.viewer.chapters.hits);
     });
-  }, [chapterList]);
+    console.log(chapterList);
+  }, []);
   return (
     <>
       <h1>
@@ -42,6 +45,23 @@ export default function BookDetailsPage() {
           .filter((book) => book.id === bookId)
           .map((id) => id.displayTitle)}
       </h1>
+      <Grid
+        container
+        spacing={2}
+        direction='row'
+        justify='center'
+        style={{ marginTop: "1em" }}
+      >
+        {chapterList.map((chapter) => (
+          <BookCard
+            key={chapter.id}
+            displayTitle={chapter.title}
+            url={chapter.url}
+            id={chapter.id}
+            valid={chapter.valid}
+          />
+        ))}
+      </Grid>
     </>
   );
 }

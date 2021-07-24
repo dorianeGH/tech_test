@@ -29,15 +29,7 @@ function Dropdown() {
   return (
     <>
       <div className='select'>
-        <select
-          name='level'
-          id='level'
-          value={levels}
-          onChange={(event) => {
-            setLevels(event.target.value);
-          }}
-        >
-          Level
+        <select name='level' id='level'>
           <option key='All' value='All'>
             All
           </option>
