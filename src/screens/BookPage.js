@@ -7,6 +7,11 @@ import { useContext } from "react";
 export default function BookPage() {
   const { selectedLevel, bookList } = useContext(BookContext);
 
+  const filteredBookByLevel = bookList.filter((book) =>
+    book.levels.map((l) => l.name).includes(selectedLevel)
+  );
+
+  console.log(filteredBookByLevel);
   return (
     <>
       <h2>Book Lists</h2>
