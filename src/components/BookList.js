@@ -13,7 +13,7 @@ export default function BookList() {
       method: "post",
       data: {
         query: `
-       {
+        {
         viewer {
             books {
               hits {

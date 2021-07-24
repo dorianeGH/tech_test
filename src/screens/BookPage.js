@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import { useForm } from "react-hook-form";
 import qs from "query-string";
-
+import Dropdown from "../components/Dropdown";
 // Defines the styles in use for this component (MUI)
 const useStyles = makeStyles((theme) => ({
   filters: {
@@ -30,54 +30,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BookPage({ bookList }) {
-  const [levels, setLevels] = useState([]);
+export default function BookPage({ bookList, levels }) {
   const { formControl, selectEmpty, label, filters } = useStyles();
-  const history = useHistory();
-  const location = useLocation();
-  const {
-    level: defaultLevel = "",
-    // with_genres: defaultWith_genres = "",
-    query: defaultQuery = "",
-  } = qs.parse(location.search);
+  // const history = useHistory();
+  // const location = useLocation();
+  // const {
+  //   level: defaultLevel = "",
+  //   // with_genres: defaultWith_genres = "",
+  //   query: defaultQuery = "",
+  // } = qs.parse(location.search);
 
   // the default values of the filters come from the querystring in the URL
   const { register, watch, control, reset } = useForm({
     defaultValues: {
-      level: defaultLevel,
+      level: levels,
       // with_genres: defaultWith_genres,
-      query: defaultQuery,
+      // query: defaultQuery,
     },
   });
-
+  console.log(levels);
   // watch for input changes
   const level = watch("level");
   // const with_genres = watch("with_genres");
-  const query = watch("query");
+  // const query = watch("query");
   return (
     <>
       <h2>Book Lists</h2>
-      <div className={filters}>
-        <FormControl className={formControl}>
-          <InputLabel className={label} shrink id='level-label'>
-            Level
-          </InputLabel>
-          <Select
-            labelId='level'
-            id='level'
-            displayEmpty
-            disabled={!!query}
-            value={level}
-            autoWidth
-            className={selectEmpty}
-            {...register("level")}
-          >
-            <MenuItem key='' value=''>
-              <em>All</em>
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+      <Dropdown />
       <BookList bookList={bookList} />
     </>
   );
