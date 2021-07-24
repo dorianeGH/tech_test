@@ -16,8 +16,8 @@ const useStyles = makeStyles({
     borderRadius: "1em",
     position: "relative",
     margin: "1em",
-    width: 200,
-    height: 300,
+    width: 300,
+    height: 200,
     "&:after": {
       content: '""',
       bottom: 0,

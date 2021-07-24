@@ -38,6 +38,7 @@ export default function BookDetailsPage() {
     });
     console.log(chapterList);
   }, []);
+
   return (
     <>
       <h1>
