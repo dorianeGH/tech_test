@@ -41,11 +41,12 @@ export default function BookDetailsPage() {
 
   return (
     <>
-      <h1>
+      <h1 className='title'>
         {bookList
           .filter((book) => book.id === bookId)
           .map((id) => id.displayTitle)}
       </h1>
+      <h3 className='title'>Chapters :</h3>
       <Grid
         container
         spacing={2}

@@ -6,7 +6,7 @@ export const BookContext = createContext();
 
 export default function EventContextProvider({ children }) {
   const [bookList, setBookList] = useState([]);
-  const [selectedLevel, setselectedLevel] = useState();
+  const [selectedLevel, setselectedLevel] = useState("All");
   useEffect(() => {
     axios({
       url: "https://api-dev.lelivrescolaire.fr/graphql",
