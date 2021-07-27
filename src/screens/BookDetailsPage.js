@@ -30,38 +30,33 @@ export default function BookDetailsPage() {
             }
           }`,
         variables: {
-          bookId: bookId,
+          bookId,
         },
       },
     }).then((result) => {
-      setChapterList(result.data.data.viewer.chapters.hits);
+      setChapterList(result?.data?.data?.viewer?.chapters?.hits);
     });
     console.log(chapterList);
   }, []);
 
   return (
     <>
-      <h1 className='title'>
+      <h1 className="title">
         {bookList
-          .filter((book) => book.id === bookId)
+          .filter(({ id }) => id === bookId)
           .map((id) => id.displayTitle)}
       </h1>
-      <h3 className='title'>Chapters :</h3>
+      <h3 className="title">Chapters :</h3>
       <Grid
         container
         spacing={2}
-        direction='row'
-        justify='center'
+        direction="row"
+        justify="center"
         style={{ marginTop: "1em" }}
       >
-        {chapterList.map((chapter) => (
-          <BookCard
-            key={chapter.id}
-            displayTitle={chapter.title}
-            url={chapter.url}
-            id={chapter.id}
-            valid={chapter.valid}
-          />
+        {chapterList.map(({ id, title, url, valid }) => (
+          // TODO: Is key as an ID a good idea?
+          <BookCard key={id} displayTitle={title} {...{ url, id, valid }} />
         ))}
       </Grid>
     </>

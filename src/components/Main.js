@@ -3,16 +3,15 @@ import BookPage from "../screens/BookPage";
 import BookDetailsPage from "../screens/BookDetailsPage";
 // import ChapterPage from "../screens/ChapterPage";
 
-export default function Main() {
-  return (
-    <main className='p-6'>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={BookPage} />
-          <Route exact path='/books/:id' component={BookDetailsPage} />
-          {/* <Route exact path='/chapters' component={ChapterPage} /> */}
-        </Switch>
-      </BrowserRouter>
-    </main>
-  );
-}
+const Main = () => (
+  <main className="p-6">
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={BookPage} />
+        <Route exact path="/books/:id" component={BookDetailsPage} />
+        {/* <Route exact path='/chapters' component={ChapterPage} /> */}
+      </Switch>
+    </BrowserRouter>
+  </main>
+);
+export default Main
