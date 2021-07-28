@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { BookContext } from "../contexts/bookContext";
-import { useContext } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react"
+import { BookContext } from "../contexts/bookContext"
+import { useContext } from "react"
+import axios from "axios"
 
 function Dropdown() {
-  const [levels, setLevels] = useState([]);
-  const { selectedLevel, setselectedLevel } = useContext(BookContext);
+  const [levels, setLevels] = useState([])
+  const { selectedLevel, setSelectedLevel } = useContext(BookContext)
 
-  useEffect(() => {
+  const init = useCallback(async () => {
     axios({
       url: "https://api-dev.lelivrescolaire.fr/graphql",
       method: "post",
@@ -23,27 +23,33 @@ function Dropdown() {
       }
     }`,
       },
-    }).then((result) => {
-      setLevels(result.data.data.viewer.levels);
-    });
-    console.log(levels);
-  }, []);
+    }).then(result => {
+      setLevels(result?.data?.data?.viewer?.levels)
+    })
+    console.log(levels)
+    // TODO: This line shows a warning about non-including the levels in the dependencies. How do you get rid of it?
+  }, [])
 
-  const handleLevelChange = (event) => {
-    event.preventDefault();
-    setselectedLevel(event.target.value);
-  };
+  useEffect(() => {
+    // noinspection JSIgnoredPromiseFromCall
+    init()
+  }, [init])
 
-  console.log(selectedLevel);
+  const handleLevelChange = event => {
+    event.preventDefault()
+    setSelectedLevel(event.target.value)
+  }
+
+  console.log(selectedLevel)
 
   return (
     <>
-      <div className='select'>
-        <select name='level' id='level' onChange={handleLevelChange}>
-          <option key='All' value='All'>
+      <div className="select">
+        <select name="level" id="level" onChange={handleLevelChange}>
+          <option key="All" value="All">
             All
           </option>
-          {levels.map((level) => (
+          {levels.map(level => (
             <option key={level.id} value={level.name}>
               {level.name}
             </option>
@@ -51,7 +57,7 @@ function Dropdown() {
         </select>
       </div>
     </>
-  );
+  )
 }
 
-export default Dropdown;
+export default Dropdown
